@@ -9,13 +9,20 @@
     android:paddingRight="60dp">
 
     <TextView
+        android:id="@+id/bot_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <TextView
         android:id="@+id/msg_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/bot_name"
         android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
         android:background="@drawable/received_message_bg"
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="18dp" />
-
 </RelativeLayout>

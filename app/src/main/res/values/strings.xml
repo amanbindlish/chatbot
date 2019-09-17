@@ -2,4 +2,5 @@
     <string name="app_name">ChatBot</string>
     <string name="enter_your_message_here">Enter your message here..</string>
     <string name="send">Send</string>
+    <string name="start_typing_to_chat_with_bot">Start typing to chat with Bot</string>
 </resources>
