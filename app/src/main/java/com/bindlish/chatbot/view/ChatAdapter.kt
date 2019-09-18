@@ -24,6 +24,11 @@ class ChatAdapter(private var messageList: ArrayList<Message>) :
         notifyDataSetChanged()
     }
 
+    fun updateMessages(msgs: List<Message>) {
+        messageList.addAll(msgs)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
         if (viewType == SENT_MESSAGE) {
             return ChatViewHolder(
