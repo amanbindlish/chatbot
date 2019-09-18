@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/user_aman"
+        android:icon="@drawable/chat_launcher"
+        android:title="Aman" />
+    <item
+        android:id="@+id/user_salman"
+        android:icon="@drawable/chat_launcher"
+        android:title="Salman" />
+    <item
+        android:id="@+id/user_akshay"
+        android:icon="@drawable/chat_launcher"
+        android:title="Akshay" />
+
+</menu>

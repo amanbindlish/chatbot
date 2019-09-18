@@ -24,12 +24,21 @@ import javax.inject.Inject
 class ChatFragment : Fragment() {
 
     companion object {
-        fun getInstance(): ChatFragment = ChatFragment()
+        val TAG = "chat_fragment"
+        val KEY_USER = "user"
+        fun getInstance(user: String): ChatFragment {
+            val fragment = ChatFragment()
+            val bundle = Bundle()
+            bundle.putString(KEY_USER, user)
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 
     @Inject
     lateinit var viewModelFactory: ChatViewModelFactory
     private lateinit var viewModel: ChatViewModel
+    private lateinit var userName: String
     private val chatAdapter = ChatAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +73,8 @@ class ChatFragment : Fragment() {
             layoutManager = llm
             adapter = chatAdapter
         }
-        viewModel.findMessages("aman")
+        userName = arguments?.get(KEY_USER)?.toString() ?: "Aman"
+        viewModel.findMessages(userName)
         // handle click of send button
         send_button.setOnClickListener {
             // hit api only if text size is greater than 0
@@ -75,7 +85,7 @@ class ChatFragment : Fragment() {
                 chatAdapter.updateMessages(Message(true, chat_text_box.text.toString()))
                 chat_recycler.smoothScrollToPosition(chatAdapter.itemCount - 1)
                 // hit api to send message and get bot message
-                viewModel.sendMessage(chat_text_box.text?.toString()?.trim(), "aman")
+                viewModel.sendMessage(chat_text_box.text?.toString()?.trim(), userName)
                 // clear chat box
                 chat_text_box.text.clear()
             }

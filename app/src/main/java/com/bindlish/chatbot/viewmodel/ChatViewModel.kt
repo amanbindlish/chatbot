@@ -25,7 +25,10 @@ class ChatViewModel @Inject constructor(private val chatRepository: ChatReposito
     val loading = MutableLiveData<Boolean>()
 
     // method to find local stored messages
-    fun findMessages(user: String) {
+    fun findMessages(user: String?) {
+        if (user == null || user.isEmpty()) {
+            return
+        }
         loading.value = true
         disposable.add(
             chatRepository.fetchAllMessages(user).subscribeOn(Schedulers.newThread())
