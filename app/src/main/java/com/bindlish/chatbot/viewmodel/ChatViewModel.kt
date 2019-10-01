@@ -3,7 +3,6 @@ package com.bindlish.chatbot.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bindlish.chatbot.di.DaggerApiComponent
 import com.bindlish.chatbot.model.Message
 import com.bindlish.chatbot.model.MessageResponse
 import com.bindlish.chatbot.model.repository.ChatRepository
@@ -20,7 +19,7 @@ class ChatViewModel @Inject constructor(private val chatRepository: ChatReposito
 
     private val disposable = CompositeDisposable()
     val message = MutableLiveData<Message>()
-    val messageList = MutableLiveData<List<Message>>()
+    var messageList = MutableLiveData<List<Message>>()
     val loadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
 

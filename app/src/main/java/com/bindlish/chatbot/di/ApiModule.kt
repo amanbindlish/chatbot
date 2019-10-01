@@ -25,7 +25,7 @@ import javax.inject.Singleton
 @Module
 class ApiModule(private val application: ChatApplication) {
 
-    private val BASE_URL = "http://192.168.43.231:5000/"
+    private val BASE_URL = "http://192.168.1.3:5000/"
 
     @Provides
     @Singleton

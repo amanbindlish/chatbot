@@ -1,14 +1,17 @@
 package com.bindlish.chatbot.model.repository
 
+import androidx.lifecycle.MutableLiveData
+import com.bindlish.chatbot.ChatApplication
 import com.bindlish.chatbot.model.DataService
 import com.bindlish.chatbot.model.Message
 import com.bindlish.chatbot.model.MessageResponse
 import com.bindlish.chatbot.model.db.ChatDao
+import com.bindlish.chatbot.utils.checkInternetConnection
 import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Callback
 import javax.inject.Inject
 import javax.inject.Singleton
 

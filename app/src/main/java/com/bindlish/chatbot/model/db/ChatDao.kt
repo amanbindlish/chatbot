@@ -1,5 +1,7 @@
 package com.bindlish.chatbot.model.db
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -17,4 +19,7 @@ interface ChatDao {
 
     @Insert
     fun insertChat(msg: Message)
+
+    @Query("SELECT * FROM Message WHERE userName = :user AND isSynced = 'false' AND isMine = 'true'")
+    fun getNotSyncedChats(user: String): Single<List<Message>>
 }

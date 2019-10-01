@@ -1,6 +1,8 @@
 package com.bindlish.chatbot.view
 
 import android.content.Context
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bindlish.chatbot.R
 import com.bindlish.chatbot.model.Message
+import com.bindlish.chatbot.utils.ConnectionReceiver
 import com.bindlish.chatbot.viewmodel.ChatViewModel
 import com.bindlish.chatbot.viewmodel.ChatViewModelFactory
 import dagger.android.support.AndroidSupportInjection
@@ -21,11 +24,11 @@ import javax.inject.Inject
 /**
  * Created by Aman Bindlish on 17,September,2019
  */
-class ChatFragment : Fragment() {
+class ChatFragment : Fragment(), ConnectionReceiver.ConnectionReceiverListener {
 
     companion object {
-        val TAG = "chat_fragment"
-        val KEY_USER = "user"
+        const val TAG = "chat_fragment"
+        const val KEY_USER = "user"
         fun getInstance(user: String): ChatFragment {
             val fragment = ChatFragment()
             val bundle = Bundle()
@@ -50,6 +53,10 @@ class ChatFragment : Fragment() {
     // required for dependency injection
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this)
+        context?.registerReceiver(
+            ConnectionReceiver(),
+            IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        )
         super.onAttach(context)
     }
 
@@ -65,6 +72,7 @@ class ChatFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         // initialise viewModel from provider
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ChatViewModel::class.java)
+
         // initialising recycler view
         chat_recycler?.apply {
             val llm = LinearLayoutManager(this.context)
@@ -73,8 +81,11 @@ class ChatFragment : Fragment() {
             layoutManager = llm
             adapter = chatAdapter
         }
+
         userName = arguments?.get(KEY_USER)?.toString() ?: "Aman"
+        // check for local messages if any
         viewModel.findMessages(userName)
+
         // handle click of send button
         send_button.setOnClickListener {
             // hit api only if text size is greater than 0
@@ -85,7 +96,7 @@ class ChatFragment : Fragment() {
                 chatAdapter.updateMessages(Message(true, chat_text_box.text.toString()))
                 chat_recycler.smoothScrollToPosition(chatAdapter.itemCount - 1)
                 // hit api to send message and get bot message
-                viewModel.sendMessage(chat_text_box.text?.toString()?.trim(), userName)
+                viewModel.sendMessage(chat_text_box.text.toString().trim(), userName)
                 // clear chat box
                 chat_text_box.text.clear()
             }
@@ -105,7 +116,7 @@ class ChatFragment : Fragment() {
             }
         })
         viewModel.message.observe(viewLifecycleOwner, Observer { message ->
-            // update adpater on success response
+            // update adapter on success response
             chatAdapter.updateMessages(message)
             chat_recycler.smoothScrollToPosition(chatAdapter.itemCount - 1)
         })
@@ -124,5 +135,16 @@ class ChatFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ConnectionReceiver.connectionReceiverListener = this
+    }
+
+    override fun onNetworkChanged(isConnected: Boolean) {
+        if (isConnected && !userName.isEmpty()) {
+            // TODO: sync messages here
+        }
     }
 }

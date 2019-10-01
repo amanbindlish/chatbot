@@ -32,4 +32,13 @@ class ChatApplication : Application(), HasActivityInjector, HasSupportFragmentIn
             .apiModule(ApiModule(this))
             .build().inject(this)
     }
+
+    init {
+        instance = this
+    }
+
+    companion object {
+        private var instance: ChatApplication? = null
+        fun getApplicationContext() = instance!!.applicationContext
+    }
 }

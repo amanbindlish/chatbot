@@ -37,5 +37,8 @@ data class Message(
 
     @ColumnInfo(name = "userName")
     @NonNull
-    var userName: String = ""
+    var userName: String = "",
+
+    @ColumnInfo(name = "isSynced")
+    var isSynced: Boolean = false
 )
