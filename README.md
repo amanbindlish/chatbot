@@ -1,11 +1,10 @@
 # Chatbot
 
-You have seen chat bots in various apps like Zomato, Swiggy etc. This chatbot app gives a working demo of how chatbot works. A single screen app  
-with support to chat with multiple users with a single bot.
+You have seen chat bots in various apps like Zomato, Swiggy etc. This chatbot app gives a working demo of how chatbot works. A single screen app with support to chat with multiple users with a single bot.
 
 ## App Screens
-<p align="center">
-    <img src="/media/chatbot_demo_one.gif" width="473" height="1000">   <img src="/media/chatbot_demo_two.gif" width="473" height="1000">
+<p>
+<img src="/media/chatbot_demo_one.gif" width="473" height="1000">   <img src="/media/chatbot_demo_two.gif" width="473" height="1000">
 </p>
 
 ## App features
@@ -24,8 +23,8 @@ To run the api just install python on local machine and run below command in ter
     - python get.py
 This will start a local server Running on http://0.0.0.0:5000/  in development mode.
 
-Final GET api looks like this: http://192.168.1.3:5000/api/chat/
-along with below params to be passed,
+* Final GET api looks like this: http://192.168.1.3:5000/api/chat/
+    along with below params to be passed,
     * <b>apiKey: 6nt5d1nJHkqbkphe</b> : apikey to be sent to the server (you can use the provided key). 
     * <b>chatBotId: 63906</b> : chatBotId for bot id (you can use the provided id).
     * <b>message: Hello</b> : message to be sent to the bot.
