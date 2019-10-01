@@ -4,7 +4,7 @@ You have seen chat bots in various apps like Zomato, Swiggy etc. This chatbot ap
 
 ## App Screens
 <p>
-<img src="/media/chatbot_demo_one.gif" width="473" height="1000">   <img src="/media/chatbot_demo_two.gif" width="473" height="1000">
+<img src="/media/chatbot_demo_one.gif" width="300" height="634">   <img src="/media/chatbot_demo_two.gif" width="300" height="634">
 </p>
 
 ## App features
